@@ -1,5 +1,5 @@
 package com.vega.springit;
-import ch.qos.logback.core.CoreConstants;
+import com.vega.springit.config.SprinitProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,6 +16,7 @@ public class SpringitApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringitApplication.class, args);
+		System.out.println("I am here with you today ");
 
 	}
 
@@ -23,7 +24,7 @@ public class SpringitApplication {
 	CommandLineRunner runner(){
 		return args -> {
 
-			System.out.println("Our  message is :" + sprinitProperties.getWelcomeMG() );
+			System.out.println("Our message is that for this khj   :" + sprinitProperties.getWelcomeMG() );
 		};
 	}
 

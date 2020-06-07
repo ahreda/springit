@@ -1,4 +1,4 @@
-package com.vega.springit;
+package com.vega.springit.config;
 
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
