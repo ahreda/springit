@@ -6,6 +6,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
+import org.springframework.core.annotation.Order;
 
 @SpringBootApplication
 @EnableConfigurationProperties(SprinitProperties.class)
@@ -16,16 +18,22 @@ public class SpringitApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringitApplication.class, args);
-		System.out.println("I am here");
-
 	}
+    /*@Bean
+    @Profile("dev")
+    CommandLineRunner runner() {
+        return args -> {
+            System.out.println(" This is a profile example");
+        };
 
+    }*/
 	@Bean
-	CommandLineRunner runner(){
-		return args -> {
+    CommandLineRunner runner(){
+	    return args -> {
+            System.out.println("Our message is " + sprinitProperties.getWelcomeMG());
+        };
+    }
 
-			System.out.println("Our message is that for this khj   :" + sprinitProperties.getWelcomeMG() );
-		};
-	}
+
 
 }
