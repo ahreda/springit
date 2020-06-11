@@ -2,6 +2,7 @@ package com.vega.springit.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +16,7 @@ import java.util.Objects;
 @Entity
 @NoArgsConstructor
 @Data
-public class Comment {
+public class Comment extends Auditable {
     @Id
     @GeneratedValue
     private long id;

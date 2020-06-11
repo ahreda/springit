@@ -19,7 +19,7 @@ import java.util.Objects;
 @Entity
 @NoArgsConstructor
 @Data
-public class Link {
+public class Link extends Auditable {
     @Id
     @GeneratedValue
     private long id;
@@ -29,7 +29,7 @@ public class Link {
     private String url;
 
     /**
-     * Associate the Link Entity with Comment Entity with One to Many Relationship. 
+     * Associate the Link Entity with Comment Entity with One to Many Relationship.
      */
     //Comment
     @OneToMany(mappedBy = "link")
