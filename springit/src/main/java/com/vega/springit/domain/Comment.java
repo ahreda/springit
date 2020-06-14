@@ -1,13 +1,14 @@
 package com.vega.springit.domain;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import java.awt.*;
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -15,11 +16,15 @@ import java.util.Objects;
  */
 @Entity
 @NoArgsConstructor
-@Data
+@RequiredArgsConstructor
+@Getter
+@Setter
+@ToString
 public class Comment extends Auditable {
     @Id
     @GeneratedValue
     private long id;
+    @NonNull
     private String body;
 
     /**
@@ -27,5 +32,6 @@ public class Comment extends Auditable {
      */
     //Link
     @ManyToOne
+    @NonNull
     private Link link;
 }

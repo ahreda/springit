@@ -1,8 +1,6 @@
 package com.vega.springit.domain;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +16,10 @@ import java.util.Objects;
  */
 @Entity
 @NoArgsConstructor
-@Data
+@RequiredArgsConstructor
+@Getter @Setter
+@ToString
+
 public class Link extends Auditable {
     @Id
     @GeneratedValue
@@ -32,8 +33,16 @@ public class Link extends Auditable {
      * Associate the Link Entity with Comment Entity with One to Many Relationship.
      */
     //Comment
-    @OneToMany(mappedBy = "link")
-    private List<Comment> comments = new ArrayList<>();
+   @OneToMany(mappedBy = "link")
+   private List<Comment> comments = new ArrayList<>();
+
+   public void addComment(Comment comment){
+
+       comments.add(comment);
+   }
+
+
+
 }
 
 
