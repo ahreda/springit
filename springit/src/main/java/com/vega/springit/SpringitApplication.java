@@ -59,7 +59,6 @@ link.addComment(comment3);
 	Comment com1 = commentRepository.findByBody("This is the comment for the third link");
 	System.out.println("he");
 	String stt= com1.getBody();
-	System.out.println(stt);
 
 
 };

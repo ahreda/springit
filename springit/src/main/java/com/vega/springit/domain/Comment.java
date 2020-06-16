@@ -34,4 +34,13 @@ public class Comment extends Auditable {
     @ManyToOne
     @NonNull
     private Link link;
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", body='" + body + '\'' +
+                ", link=" + link +
+                '}';
+    }
 }
