@@ -19,7 +19,7 @@ public class LinkController {
     }
 
 
-    @GetMapping("/links")
+   @GetMapping("/links")
     public Optional<Link> getAllTopics() {
         Optional<Link> myLinks = linkRepository.findById((long) 2);
         return myLinks;
@@ -35,21 +35,21 @@ public class LinkController {
 
     }
 
-    @GetMapping("/{id}")
+   /* @GetMapping("/{id}")
     public Optional<Link> read(@PathVariable Long id) {
         return linkRepository.findById(id);
 
-    }
+    }*/
 
-
+/*
     @PutMapping("/{id}")
     public Link update(@PathVariable Long id, @ModelAttribute Link link){
         return linkRepository.save(link);
-    }
-    @DeleteMapping("/{id}")
+    }*/
+  /*  @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id){
         linkRepository.deleteById(id);
 
-    }
+    }*/
 
 }
