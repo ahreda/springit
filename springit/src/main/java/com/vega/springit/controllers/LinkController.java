@@ -4,15 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
 @Controller
 public class LinkController {
 
     @GetMapping("/foo")
-    public String foo(Model model){
-
-        model.addAttribute("pageTitle","This page is foo");
+    public String home(Model model) {
+        model.addAttribute("title","Hello, Thymeleaf!");
         return "foo";
     }
-
 }
