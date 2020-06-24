@@ -58,7 +58,7 @@ public class LinkController {
         return "link/submit";
     }
 
-
+    /* For adding the link */
     @PostMapping("/link/submit")
     public String createLink(@Valid Link link, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         if( bindingResult.hasErrors() ) {
