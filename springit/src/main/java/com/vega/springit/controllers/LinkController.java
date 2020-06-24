@@ -47,6 +47,7 @@ public class LinkController {
 
         else {
             return "redirect:/";
+
         }
 
     }
