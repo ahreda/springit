@@ -35,6 +35,7 @@ public class Comment extends Auditable {
     @NonNull
     private Link link;
 
+
     @Override
     public String toString() {
         return "Comment{" +

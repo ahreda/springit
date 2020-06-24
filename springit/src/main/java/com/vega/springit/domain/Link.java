@@ -2,12 +2,14 @@ package com.vega.springit.domain;
 
 import com.vega.springit.services.BeanUtil;
 import lombok.*;
+import org.hibernate.validator.constraints.URL;
 import org.ocpsoft.prettytime.PrettyTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
@@ -31,9 +33,14 @@ public class Link extends Auditable {
     @Id
     @GeneratedValue
     private long id;
+
     @NonNull
+    @NotEmpty(message = "Please enter a title")
     private String title;
+
     @NonNull
+    @NotEmpty(message = "Please enter a URL")
+    @URL(message = "Please enter a valid URL")
     private String url;
 
     /**
@@ -43,7 +50,8 @@ public class Link extends Auditable {
    @OneToMany(mappedBy = "link")
    private List<Comment> comments = new ArrayList<>();
 
-   public void addComment(Comment comment){
+
+    public void addComment(Comment comment){
 
        comments.add(comment);
    }
