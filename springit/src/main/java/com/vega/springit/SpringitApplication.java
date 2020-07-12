@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 @SpringBootApplication
-@EnableJpaAuditing
 public class SpringitApplication {
 
 
@@ -32,6 +31,7 @@ public class SpringitApplication {
 
 	@Bean
 	PrettyTime prettyTime(){
+
 		return new PrettyTime();
 	}
 

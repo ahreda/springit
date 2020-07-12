@@ -2,27 +2,42 @@ package com.vega.springit.bootstrap;
 
 
 import com.vega.springit.domain.Link;
+import com.vega.springit.domain.Role;
+import com.vega.springit.domain.User;
 import com.vega.springit.repository.CommentRepository;
 import com.vega.springit.repository.LinkRepository;
+import com.vega.springit.repository.RoleRepository;
+import com.vega.springit.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 @Component
 public class DatabaseLoader implements CommandLineRunner {
 
     LinkRepository linkRepository;
     CommentRepository commentRepository;
+    UserRepository userRepository;
+    RoleRepository roleRepository;
 
-    public DatabaseLoader(LinkRepository linkRepository, CommentRepository commentRepository) {
+    public DatabaseLoader(LinkRepository linkRepository, CommentRepository commentRepository, UserRepository userRepository, RoleRepository roleRepository) {
         this.linkRepository = linkRepository;
         this.commentRepository = commentRepository;
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
+
+
 
     @Override
     public void run(String... args) throws Exception {
+
+        addUsersAndRoles();
 
         Map<String,String> links = new HashMap<>();
         links.put("Securing Spring Boot APIs and SPAs with OAuth 2.0","https://auth0.com/blog/securing-spring-boot-apis-and-spas-with-oauth2/?utm_source=reddit&utm_medium=sc&utm_campaign=springboot_spa_securing");
@@ -36,6 +51,7 @@ public class DatabaseLoader implements CommandLineRunner {
         links.put("Simplest way to Upload and Download Files in Java with Spring Boot - Code to download from Github","https://www.opencodez.com/uncategorized/file-upload-and-download-in-java-spring-boot.htm");
         links.put("Add Social Login to Your Spring Boot 2.0 app","https://developer.okta.com/blog/2018/07/24/social-spring-boot");
         links.put("File download example using Spring REST Controller","https://www.jeejava.com/file-download-example-using-spring-rest-controller/");
+        links.put("New new new new new new new new new new new new new ","https://www.jeejava.com/file-download-example-using-spring-rest-controller/");
 
         links.forEach((k,v) -> {
             linkRepository.save(new Link(k,v));
@@ -46,4 +62,48 @@ public class DatabaseLoader implements CommandLineRunner {
 
 
         }
+
+        private void addUsersAndRoles(){
+            // password Encoding
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            String userpass = "{bcrypt}" + encoder.encode("User.147");
+            String adminpass ="{bcrypt}" + encoder.encode("Admin.147");
+            String masterPass = "{bcrypt}" + encoder.encode("Master.147");
+
+
+            // Create Roles & Add to the Role Repository
+            Role userRole = new Role("ROLE_USER");
+            Role adminRole = new Role("ROLE_ADMIN");
+            roleRepository.save(userRole);
+            roleRepository.save(adminRole);
+
+
+            //Create Users
+            User user = new User("user@gmail.com", userpass, true);
+            User admin = new User("admin@gmail.com", adminpass, true);
+            User master = new User("master@gmail.com", masterPass, true);
+
+
+            // Add the roles to the users by addRole method ( single role)
+            user.addRole(userRole);
+            userRepository.save(user);
+            admin.addRole(adminRole);
+            userRepository.save(admin);
+
+            //addRoles ( adding set of roles directly).
+            Set<Role> roleSet = new HashSet<>();
+            roleSet.add(userRole);
+            roleSet.add(adminRole);
+
+            master.addRoles(roleSet);
+            userRepository.save(master);
+
+
+
+
+
+
+
+        }
+
     }
