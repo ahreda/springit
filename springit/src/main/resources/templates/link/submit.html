@@ -22,7 +22,7 @@
 
             Input:
             th:field=”*{name}”          >>>name is the object property.
-            th:errors="*{title}"        >>> handle the error text message specified by @NotEmpty(message = "P")
+            th:errors="*{title}"        >>> handle the error text message specified in Title fields -- by @NotEmpty(message = "P"), URL(),...
                   -->
   <form id="frmAddLink" method="POST" th:action="@{/link/submit}" th:object="${link}">
       <div class="form-group">
@@ -32,6 +32,7 @@
           <input type="text"
                  class="form-control"  id="title"
                  placeholder="Enter Title"
+
                  required="required"
                  th:field="*{title}">
           <small th:errors="*{title}" style="color:red;"></small>
@@ -41,7 +42,10 @@
       <div class="form-group">
           <label for="url">URL</label>
 
-          <input type="url" class="form-control" id="url" placeholder="URL" required="required"
+          <input type="url" class="form-control" id="url"
+                 placeholder="URL"
+
+                 required="required"
                  th:field="*{url}">
           <small th:errors="*{url}" style="color:red;"></small>
       </div>
