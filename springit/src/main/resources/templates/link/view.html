@@ -24,7 +24,7 @@
         </div>
         <div class="col-11">
             <p class="title">
-                <a class="title " href="http://therealdanvega.com/blog/2018/03/01/what-is-new-spring-boot-2">
+                <a class="title " th:href="${link.url}" th:text="${link.title}">
                     What's new in Spring Boot 2?
                 </a>
                 <span class="domain">(<a href="http://therealdanvega.com">therealdanvega.com</a>)</span>
@@ -32,7 +32,7 @@
             <p class="tagline ">submitted
 
                 <time th:title="${link.getCreationDate()}" th:datetime="${link.getCreationDate()}" class="live-timestamp" th:text="${link.getPrettyTime()}"> 2 hours</time>by
-                <a href="https://www.reddit.com/user/therealdanvega" class="author">therealdanvega</a>
+                <a href="https://www.reddit.com/user/therealdanvega" class="author" th:text="${link.createdBy}">therealdanvega</a>
                 <span class="userattrs"></span>
 
 
