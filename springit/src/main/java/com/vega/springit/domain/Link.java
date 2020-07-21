@@ -43,6 +43,7 @@ public class Link extends Auditable {
     @URL(message = "Please enter a valid URL")
     private String url;
 
+
     /**
      * Associate the Link Entity with Comment Entity with One to Many Relationship.
      */
@@ -50,11 +51,10 @@ public class Link extends Auditable {
    @OneToMany(mappedBy = "link")
    private List<Comment> comments = new ArrayList<>();
 
+   @OneToMany(mappedBy = "link")
+   private List<Vote> votes = new ArrayList<>();
 
-    public void addComment(Comment comment){
-
-       comments.add(comment);
-   }
+   private int voteCount = 0;
 
     public String getDomainName() throws URISyntaxException {
         URI uri = new URI(this.url);
