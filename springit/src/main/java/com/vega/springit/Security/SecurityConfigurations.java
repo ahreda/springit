@@ -31,6 +31,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
                     .antMatchers("/link/submit").hasRole("USER")
                     .antMatchers("/h2-console/**").permitAll()
                     .antMatchers("/actuator").hasRole("ADMIN")
+                    .antMatchers("/newlink").permitAll()
                 .requestMatchers(EndpointRequest.to("info")).hasRole("USER")
                 //.requestMatchers(EndpointRequest.toAnyEndpoint()).hasRole("ADMIN")
 

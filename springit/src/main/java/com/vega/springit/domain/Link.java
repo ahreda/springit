@@ -27,7 +27,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Getter @Setter
-@ToString
+
 
 public class Link extends Auditable {
     @Id
@@ -56,6 +56,10 @@ public class Link extends Auditable {
 
    private int voteCount = 0;
 
+   public void addComment(Comment comment){
+       comments.add(comment);
+
+   }
     public String getDomainName() throws URISyntaxException {
         URI uri = new URI(this.url);
         String domain = uri.getHost();
