@@ -1,0 +1,18 @@
+package com.vega.springit.services;
+
+import com.vega.springit.domain.Vote;
+import com.vega.springit.repository.VoteRepository;
+import org.springframework.stereotype.Service;
+
+@Service
+public class VoteService {
+    VoteRepository voteRepository;
+
+    public VoteService(VoteRepository voteRepository) {
+        this.voteRepository = voteRepository;
+    }
+
+    public  Vote save(Vote vote) {
+        return voteRepository.save(vote);
+    }
+}

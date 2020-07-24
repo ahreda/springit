@@ -10,8 +10,12 @@
 <div class="container">
 
 
-   <div class="alert alert-success" role="alert"  th:if="${success}">
+  <!-- <div class="alert alert-success" role="alert"  th:if="${success}"> -->
+    <div class="alert alert-success" role="alert"  th:if="${success}">
     New link was successfully created!
+    </div>
+    <div class="alert alert-success" role="alert"  th:if="${commAdded}">
+        New Comment was successfully added!
     </div>
 
     
