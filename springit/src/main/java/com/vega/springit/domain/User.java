@@ -7,6 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -36,11 +37,31 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private boolean enabled;
 
+    @NonNull
+    @NotEmpty(message = "You must enter First Name.")
+    private String firstName;
+
+    @NonNull
+    @NotEmpty(message = "You must enter Last Name.")
+    private String lastName;
+
+    @Transient
+    @Setter(AccessLevel.NONE)
+    private String fullName;
+
+    @NonNull
+    @NotEmpty(message = "Please enter alias.")
+    @Column(nullable = false, unique = true)
+    private String alias;
+
+    public String getFullName(){
+        return firstName + " " + lastName;
+    }
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable( name = "users_roles",
-                joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-                inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
     private Set<Role> roles = new HashSet<>();
 
