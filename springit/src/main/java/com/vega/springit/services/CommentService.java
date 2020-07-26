@@ -9,6 +9,10 @@ public class CommentService {
 
     CommentRepository commentRepository;
 
+    public CommentService(CommentRepository commentRepository) {
+        this.commentRepository = commentRepository;
+    }
+
     public Comment save(Comment comment) {
         return commentRepository.save(comment);
     }
