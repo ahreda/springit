@@ -92,17 +92,19 @@ public class DatabaseLoader implements CommandLineRunner {
         roleRepository.save(adminRole);
 
         User user = new User("user@gmail.com",userpass,true,"Joe","User","joedirt");
+        user.setConfirmPassword(userpass);
         user.addRole(userRole);
         userRepository.save(user);
         users.put("user@gmail.com",user);
 
         User admin = new User("admin@gmail.com",adminpass,true,"Joe","Admin","masteradmin");
-        admin.setAlias("joeadmin");
+        admin.setConfirmPassword(adminpass);
         admin.addRole(adminRole);
         userRepository.save(admin);
         users.put("admin@gmail.com",admin);
 
         User master = new User("super@gmail.com",masterPass,true,"Super","User","superduper");
+        master.setConfirmPassword(masterPass);
         master.addRoles(new HashSet<>(Arrays.asList(userRole,adminRole)));
         userRepository.save(master);
         users.put("super@gmail.com",master);

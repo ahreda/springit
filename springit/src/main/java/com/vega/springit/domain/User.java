@@ -1,12 +1,14 @@
 package com.vega.springit.domain;
 
 
+import com.vega.springit.domain.validator.PasswordsMatch;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.*;
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Getter @Setter
 @ToString
+@PasswordsMatch
 public class User implements UserDetails {
 
     @Id
@@ -34,15 +37,15 @@ public class User implements UserDetails {
     private String password;
 
     @NonNull
-    @Column(nullable = false)
+   @Column(nullable = false)
     private boolean enabled;
 
     @NonNull
-    @NotEmpty(message = "You must enter First Name.")
+    @NotEmpty(message = "Please Enter your First Name")
     private String firstName;
 
     @NonNull
-    @NotEmpty(message = "You must enter Last Name.")
+    @NotEmpty(message = "Please Enter your Last Name")
     private String lastName;
 
     @Transient
@@ -53,6 +56,12 @@ public class User implements UserDetails {
     @NotEmpty(message = "Please enter alias.")
     @Column(nullable = false, unique = true)
     private String alias;
+
+    @Transient
+    @NotEmpty(message = "Please Enter Password confirmation.")
+    private String confirmPassword;
+
+    private String activationCode;
 
     public String getFullName(){
         return firstName + " " + lastName;
@@ -105,5 +114,10 @@ public class User implements UserDetails {
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
     }
 }
