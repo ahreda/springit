@@ -57,6 +57,8 @@ public class User implements UserDetails {
     @Column(nullable = false, unique = true)
     private String alias;
 
+    private String userName;
+
     @Transient
     @NotEmpty(message = "Please Enter Password confirmation.")
     private String confirmPassword;

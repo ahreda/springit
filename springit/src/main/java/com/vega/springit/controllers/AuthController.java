@@ -71,7 +71,7 @@ public class AuthController {
         Optional<User> user = userService.findByEmailAndActivationCode(email,activationCode);
         if( user.isPresent() ){
             User newUser = user.get();
-            //newUser.setEnabled(true);
+            newUser.setEnabled(true);
             newUser.setConfirmPassword(newUser.getPassword());
             userService.save(newUser);
             userService.sendWelcomeEmail(newUser);
